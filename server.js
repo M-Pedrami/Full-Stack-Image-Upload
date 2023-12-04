@@ -1,18 +1,20 @@
+require("dotenv/config");
 const express = require("express");
 const app = express();
 const cors = require("cors");
-require("dotenv/config");
 const PORT = process.env.PORT;
-const mongoose = require("./database/db");
+const connectDB = require("./database/db");
+require('colors')
 const userRouter = require("./routes/userRoutes");
 const productRouter = require("./routes/productRoutes");
-const uploadImageMiddleware = require("./middlewares/multer/uploadImage")
+
+
+connectDB()
 
 //Middlewares
 app.use(cors());
 app.use(express.json());
-app.use("/uploads", express.static("uploads"))
-app.use("/products", uploadImageMiddleware)
+
 
 //Routes
 app.use("/users", userRouter);
@@ -23,5 +25,5 @@ app.get("/", (req, res) => {
 });
 
 app.listen(PORT, () =>
-  console.log(`server is listening on http://localhost:${PORT}`)
+  console.log(`server is listening on http://localhost:${PORT}`.rainbow)
 );

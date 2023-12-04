@@ -1,5 +1,6 @@
 const Product = require("../models/product");
 const User = require("../models/user");
+require("colors")
 const addProduct = async (req, res) => {
   try {
     const { name, price, image, owner } = req.body;
@@ -22,4 +23,9 @@ const getProducts = async (req, res) => {
     console.log(error);
   }
 };
-module.exports = { addProduct, getProducts };
+
+const testUpload = async (req, res) => {
+  console.log(req.file)
+  console.log(req.body)
+}
+module.exports = { addProduct, getProducts, testUpload };
